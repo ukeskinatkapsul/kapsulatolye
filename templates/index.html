@@ -6,36 +6,48 @@
 
 {% block body %}
 <div class="content">
-     <h1 style="text-align: center">İş Takip Edelim</h1>
-    {% if tasks|length < 1 %}
-    <h4 style="text-align: center"> Henüz bir şey yok. Acil iş alman lazım! Paraaaa!!!!! </h4>
+     <h1 style="text-align: center">Ne Verdik Bilelim!</h1>
+    {% if borrows|length < 1 %}
+    <h4 style="text-align: center"> Yok mu kardeşim, roket moket:) </h4>
     {% else %}
      <table>
         <tr>
-            <th>İş</th>    
-            <th>Eklenme Tarihi</th>
-            <th>Ne Zamana?</th>
+            <th>Takım Adı</th>    
+            <th>Malzeme Adı</th>
+            <th>Adet</th>
+            <th>Veren Personel</th>
+            <th>Verdiği Tarih</th>
             <th>Actions</th>
         </tr>
-        {% for task in tasks %}
+        {% for borrow in borrows %}
             <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>{{ task.date_deadline }}</td>
+                <td>{{ borrow.team_name }}</td>
+                <td>{{ borrow.equipment }}</td>
+                <td>{{ borrow.quantity }}</td>
+                <td>{{ borrow.staff }}</td>
+                <td>{{ borrow.date_created.datetime }}</td>
                 <td>
-                    <a href="/delete/{{task.id}}">Sil</a>
+                    <a href="">Sil</a>
                     <br>
-                    <a href="/update/{{task.id}}">Güncelle</a>
+                    <a href="">Güncelle</a>
                 </td>
             </tr>
         {% endfor %}    
      </table>
     {% endif %}  
      <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="İş Ekle">    
-        <input type="date" name="date_deadline" id="content"> 
-        <input type="submit" value="Ne Zamana?"> 
+        <input type="text" name="team_name" >
+        <label> takım adı</label>
+        <!-- <input type="submit" value="takim adi"> -->   
+        <input type="text" name="equipment" >
+        <label> malzeme adı</label>
+        <!-- <input type="submit" value="takim adi"> -->   
+        <input type="quantity" name="quantity" >
+        <label> adet</label>
+        <input type="staff" name="staff" >
+        <label> personel</label>
+        <br>
+        <input type="submit" value="gönder"> 
      </form>
 </div>
 {% endblock %}
