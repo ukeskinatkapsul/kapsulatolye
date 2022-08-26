@@ -22,7 +22,6 @@ class atolye(db.Model):
         self.staff = staff
         self.team_name = team_name   
 
-db.create_all()
 
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -40,11 +39,11 @@ def index():
         new_team_name = atolye(team_name=team_name_content)
 
         try:
-            #db.session.add_all([new_equipment, new_quantity, new_staff, new_team_name])
+            db.session.add_all([new_equipment, new_quantity, new_staff, new_team_name])
             db.session.add(new_equipment)
-            #db.session.add(new_team_name)
-            #db.session.add(new_staff)
-            #db.session.add(new_quantity) 
+            db.session.add(new_team_name)
+            db.session.add(new_staff)
+            db.session.add(new_quantity) 
             db.session.commit()
             return redirect("/")
         except:
