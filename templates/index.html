@@ -25,9 +25,9 @@
                 <td>{{ borrow.equipment }}</td>
                 <td>{{ borrow.quantity }}</td>
                 <td>{{ borrow.staff }}</td>
-                <td>{{ borrow.date_created.datetime }}</td>
+                <td>{{ borrow.date_created }}</td>
                 <td>
-                    <a href="">Sil</a>
+                    <a href="/delete/{{borrow.id}}">Sil</a>
                     <br>
                     <a href="">Güncelle</a>
                 </td>
@@ -36,18 +36,18 @@
      </table>
     {% endif %}  
      <form action="/" method="POST">
-        <input type="text" name="team_name" >
+        <input type="text" name="team_name">
         <label> takım adı</label>
         <!-- <input type="submit" value="takim adi"> -->   
         <input type="text" name="equipment" >
         <label> malzeme adı</label>
         <!-- <input type="submit" value="takim adi"> -->   
-        <input type="quantity" name="quantity" >
+        <input type="text" name="quantity" >
         <label> adet</label>
-        <input type="staff" name="staff" >
+        <input type="text" name="staff" >
         <label> personel</label>
         <br>
-        <input type="submit" value="gönder"> 
+        <button type="submit">gönder</button>  
      </form>
 </div>
 {% endblock %}

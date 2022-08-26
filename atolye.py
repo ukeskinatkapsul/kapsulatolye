@@ -3,45 +3,52 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///borrow.db"
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///atolye.db'
 db = SQLAlchemy(app)
 
 class atolye(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    equipment = db.Column(db.String(100), nullable = False)
+    equipment = db.Column(db.String(100))
     date_created = db.Column(db.DateTime, default = datetime.utcnow)
     quantity = db.Column(db.Integer)
-    staff = db.Column(db.String(30), nullable = False)
-    team_name = db.Column(db.String(100), nullable = False)
+    staff = db.Column(db.String(30))
+    team_name = db.Column(db.String(100))
 
 
-    def __repr__(self):
-        return "<Task %r>" % self.id
-       
+    def __init__(self, equipment, date_created, quantity, staff, team_name):
+        self.equipment = equipment
+        self.date_created = date_created
+        self.quantity = quantity
+        self.staff = staff
+        self.team_name = team_name   
+
+db.create_all()
 
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
-        borrow_equipment = request.form["equipment"]
-        new_equipment = atolye(equipment=borrow_equipment)
-
-        borrow_quantity = request.form["quantity"]
-        new_quantity = atolye(quantity=borrow_quantity)
+        equipment_content = request.form["equipment"]
+        new_equipment = atolye(equipment=equipment_content)
         
-        borrow_staff = request.form["staff"]
-        new_staff = atolye(quantity=borrow_staff)
+        quantity_content = request.form["quantity"]
+        new_quantity = atolye(quantity=quantity_content)
         
-        borrow_team_name = request.form["team_name"]
-        new_team_name = atolye(quantity=borrow_team_name)
-
+        staff_content = request.form["staff"]
+        new_staff = atolye(staff=staff_content)
+        
+        team_name_content = request.form["team_name"]
+        new_team_name = atolye(team_name=team_name_content)
 
         try:
-            db.session.add(new_equipment, new_quantity, new_staff, new_team_name) #new_task, bunu kaldırınca niye tarih çalışıyor???
-            #db.session.add(new_deadline)
+            #db.session.add_all([new_equipment, new_quantity, new_staff, new_team_name])
+            db.session.add(new_equipment)
+            #db.session.add(new_team_name)
+            #db.session.add(new_staff)
+            #db.session.add(new_quantity) 
             db.session.commit()
             return redirect("/")
         except:
-            return "There is an issue adding your task"
+            return "There is an issue adding your borrow"
 
     else:
         borrows = atolye.query.order_by(atolye.date_created).all()
@@ -57,7 +64,7 @@ def delete(id):
         db.session.commit()
         return redirect("/")
     except:
-        return "There was a problem deleting that task"
+        return "There was a problem deleting that borrow"
 
 @app.route("/update/<int:id>", methods = ["GET", "POST"])
 def update(id):
@@ -73,7 +80,7 @@ def update(id):
             db.session.commit()
             return redirect("/")
         except:
-            return "There was an issue updating your task"
+            return "There was an issue updating your borrow"
 
     else:
          return render_template("update.html", borrow = borrow)  
