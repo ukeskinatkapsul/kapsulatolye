@@ -1,2 +1,1 @@
-web: gunicorn app:atolye1 -b 0.0.0.0:5000
-
+web: gunicorn atolye1:app
