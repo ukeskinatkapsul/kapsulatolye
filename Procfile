@@ -1,1 +1,1 @@
-web: gunicorn app:atolye1.py
+web: gunicorn app:atolye1
