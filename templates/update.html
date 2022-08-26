@@ -9,10 +9,11 @@
      <h1 style="text-align: center">Update Task</h1>
 
      <form action="/update/{{borrow.id}}" method="POST">
-        <input type="text" name="content" id="id" value="{{ borrow.staff }}">
-        <input type="submit" value="Update Task">  
-        <input type="date" name="date_deadline" id="id"> 
-        <input type="submit" value="Ne Zamana?"> 
+        <input type="text" name="team_name" id="id" value="{{ borrow.team_name }}">
+        <input type="text" name="equipment" id="id" value="{{ borrow.equipment }}"> 
+        <input type="text" name="quantity" id="id" value="{{ borrow.quantity }}">
+        <input type="text" name="staff" id="id" value="{{ borrow.staff }}">
+        <input type="submit" value="Gönder"> 
      </form>
 </div>
 {% endblock %}
