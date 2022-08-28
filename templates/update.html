@@ -9,10 +9,10 @@
      <h1 style="text-align: center">Update Task</h1>
 
      <form action="/update/{{borrow.id}}" method="POST">
-        <input type="text" name="team_name" id="id" value="{{ borrow.team_name }}">
-        <input type="text" name="equipment" id="id" value="{{ borrow.equipment }}"> 
-        <input type="text" name="quantity" id="id" value="{{ borrow.quantity }}">
-        <input type="text" name="staff" id="id" value="{{ borrow.staff }}">
+        <input type="text" name="team_name" id="id" value="{{ borrow.team_name }}">  <label> takım adı</label>
+        <input type="text" name="equipment" id="id" value="{{ borrow.equipment }}">  <label> malzeme adı</label>
+        <input type="text" name="quantity" id="id" value="{{ borrow.quantity }}"> <label> adet </label>
+        <input type="text" name="staff" id="id" value="{{ borrow.staff }}">  <label> personel</label>
         <input type="submit" value="Gönder"> 
      </form>
 </div>
